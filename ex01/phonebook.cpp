@@ -2,83 +2,173 @@
 
 Contact::Contact(void)
 {
-  this -> firstName = "";
-  this -> lastName = "";
-  this -> phoneNumber = "";
+  this->firstName = "";
+  this->lastName = "";
+  this->phoneNumber = "";
+  this ->nickName = "";
+  this->darkSecret = "";
   std::cout << "Constructor called" << std::endl;
-  return;
 }
 
 Contact::~Contact(void)
 {
   std::cout << "Destructor called" << std::endl;
-  return;
 }
 
-static bool isChar(char c)
+static bool isChar(char c) 
+{ 
+  return std::isalpha(c); 
+}
+
+bool Contact::isValidString(const std::string &name)
 {
-  return std::isalpha(c);
+  for (unsigned int i = 0; i < name.length(); i++)
+  {
+    if (!isChar(name[i]))
+      return false;
+  }
+  return true;
+}
+static bool isDigitChar(char c) 
+{ 
+  return std::isdigit(c); 
 }
 
-bool Contact::isValidString(const std:: string &name)
+bool Contact::isValidPhone(const std::string &phoneNumber)
 {
-  return std::all_of(name.begin(),name.end(),isChar);
-}
-
-static bool isDigitChar(char c)
-{   
-  return std::isdigit(c);
-}
-
-bool Contact::isValidPhone(const std:: string &phoneNumber)
-{
-  return std::all_of(phoneNumber.begin(), phoneNumber.end(), isDigitChar);
+  for (unsigned int i = 0; i < phoneNumber.length(); i++)
+  {
+    if (!isDigitChar(phoneNumber[i]))
+      return false;
+  }
+  return true;
 }
 
 void Contact::contactSet()
 {
-    do {
+  do {
     std::cout << "Please, enter First Name : ";
-    std::getline(std::cin,firstName);
-    if(!isValidString(firstName) || firstName.empty())
-    {
-      std::cout << "❌First Name : " << firstName;
-      std::cout << " is not valid❌" << std::endl;
-    }
-    }while(!isValidString(firstName) || firstName.empty());
+    std::getline(std::cin, firstName);
+    if (!isValidString(firstName) || firstName.empty())
+      std::cout << "❌ First Name not valid ❌" << std::endl;
+  } while (!isValidString(firstName) || firstName.empty());
 
-    do {
+  do {
     std::cout << "Please, enter Last Name : ";
-    std::getline(std::cin,lastName);
-    if(!isValidString(lastName) || lastName.empty())
-    {
-      std::cout << "❌Last Name : " << lastName;
-      std::cout << " is not valid❌" << std::endl;
-    }
-    }while(!isValidString(lastName) || lastName.empty());
+    std::getline(std::cin, lastName);
+    if (!isValidString(lastName) || lastName.empty())
+      std::cout << "❌ Last Name not valid ❌" << std::endl;
+  } while (!isValidString(lastName) || lastName.empty());
 
-    do {
+  do {
     std::cout << "Please, enter Phone Number : ";
-    std::getline(std::cin,phoneNumber);
-    if(!isValidPhone(phoneNumber) || phoneNumber.empty())
-    {
-      std::cout << "❌Number : " << phoneNumber;
-      std::cout << " is not valid❌" << std::endl;
-    }
-    }while(!isValidPhone(phoneNumber) || phoneNumber.empty());
-    return;
+    std::getline(std::cin, phoneNumber);
+    if (!isValidPhone(phoneNumber) || phoneNumber.empty())
+      std::cout << "❌ Phone Number not valid ❌" << std::endl;
+  } while (!isValidPhone(phoneNumber) || phoneNumber.empty());
+  do {
+    std::cout << "Please, enter your Nickname : ";
+    std::getline(std::cin, nickName);
+    if (nickName.empty())
+      std::cout << "❌ NickName not valid ❌" << std::endl;
+  } while (nickName.empty());
+
+  do {
+    std::cout << "Please, enter your dark secret : ";
+    std::getline(std::cin, darkSecret);
+    if (darkSecret.empty())
+      std::cout << "❌ Dark Secret not valid ❌" << std::endl;
+  } while (darkSecret.empty());
 }
 
-void Contact::contactDisplay()const
+static void truncated(const std::string &str)
 {
-    std::cout << firstName << " " << lastName << " : " << phoneNumber << std::endl;
-    return;
+  if (str.length() > 10)
+    std::cout << std::setw(10) << str.substr(0, 9) + ".";
+  else
+    std::cout << std::setw(10) << str;
 }
 
-int main(void)
+void Contact::initDisplay() const
 {
-  Contact instance;
-  instance.contactSet();
-  instance.contactDisplay();
-  return(0);
+  std::cout << std::setw(10) << "Index" << "|" << 
+  std::setw(10) << "First Name" << "|" << 
+  std::setw(10) << "Last Name" << "|" <<
+  std::setw(10) << "Nickname" << "|" <<
+  std::setw(10) << "Phone Number" << std::endl;
+}
+
+void Contact::contactDisplayNotTrunked() const
+{
+  std::cout << "First Name: " << firstName << std::endl;
+  std::cout << "Last Name : " << lastName << std::endl;
+  std::cout << "Phone Number: " << phoneNumber << std::endl;
+  std::cout << "Nickname: " << nickName << std::endl;
+  std::cout << "Dark Secret: " << darkSecret << std::endl;
+}
+
+void Contact::contactDisplayTrunked(int index) const
+{
+  std::cout << std::setw(10) << index << "|";
+  truncated(firstName);
+  std::cout << "|";
+  truncated(lastName);
+  std::cout << "|";
+  truncated(phoneNumber);
+  std::cout << "|";
+  truncated(nickName);
+  std::cout << std::endl;
+}
+
+void PhoneBook::addContact()
+{
+  contacts[index].contactSet();
+  index = (index + 1) % 8;
+  if (count < 8)
+    count++;
+}
+
+void PhoneBook::searchContact() const
+{
+  if (count == 0) {
+    std::cout << "I don't have any contacts" << std::endl;
+    return;
+  }
+
+  contacts[0].initDisplay();
+  for (int i = 0; i < count; i++)
+    contacts[i].contactDisplayTrunked(i);
+
+  std::cout << "Enter index please: ";
+  std::string number;
+  std::getline(std::cin, number);
+
+  if (number.empty())
+    return;
+
+  int result = std::atoi(number.c_str());
+  if (result >= 0 && result < count)
+    contacts[result].contactDisplayNotTrunked();
+  else
+    std::cout << "❌ Invalid index ❌" << std::endl;
+}
+
+int main()
+{
+  PhoneBook book;
+  std::string command;
+
+  while (true)
+  {
+    std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+    std::getline(std::cin, command);
+
+    if (command == "ADD")
+      book.addContact();
+    else if (command == "SEARCH")
+      book.searchContact();
+    else if (command == "EXIT")
+      break;
+  }
+  return 0;
 }
