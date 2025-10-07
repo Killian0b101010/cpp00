@@ -170,5 +170,7 @@ int main()
     else if (command == "EXIT")
       break;
   }
+  Contact c;
+  c.test = "datetimed";
   return 0;
 }

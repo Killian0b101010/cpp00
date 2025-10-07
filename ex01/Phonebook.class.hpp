@@ -15,6 +15,7 @@ class Contact
   public:
   Contact();
   ~Contact();
+  std::string test;
   bool isValidPhone(const std::string& phoneNumber);
   bool isValidString(const std::string& name);
   void contactSet();
