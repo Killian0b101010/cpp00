@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <fstream>
 #ifndef PHONEBOOK_CLASS_HPP
 #define PHONEBOOK_CLASS_HPP
 

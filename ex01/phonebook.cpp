@@ -29,6 +29,7 @@ bool Contact::isValidString(const std::string &name)
   }
   return true;
 }
+
 static bool isDigitChar(char c) 
 { 
   return std::isdigit(c); 
@@ -49,6 +50,11 @@ void Contact::contactSet()
   do {
     std::cout << "Please, enter First Name : ";
     std::getline(std::cin, firstName);
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
     if (!isValidString(firstName) || firstName.empty())
       std::cout << "❌ First Name not valid ❌" << std::endl;
   } while (!isValidString(firstName) || firstName.empty());
@@ -56,6 +62,11 @@ void Contact::contactSet()
   do {
     std::cout << "Please, enter Last Name : ";
     std::getline(std::cin, lastName);
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
     if (!isValidString(lastName) || lastName.empty())
       std::cout << "❌ Last Name not valid ❌" << std::endl;
   } while (!isValidString(lastName) || lastName.empty());
@@ -63,12 +74,23 @@ void Contact::contactSet()
   do {
     std::cout << "Please, enter Phone Number : ";
     std::getline(std::cin, phoneNumber);
-    if (!isValidPhone(phoneNumber) || phoneNumber.empty())
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
+    if (!isValidPhone(phoneNumber) || phoneNumber.empty() ||phoneNumber.length() < 2 || phoneNumber.length() >= 15)
       std::cout << "❌ Phone Number not valid ❌" << std::endl;
   } while (!isValidPhone(phoneNumber) || phoneNumber.empty());
+  
   do {
     std::cout << "Please, enter your Nickname : ";
     std::getline(std::cin, nickName);
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
     if (nickName.empty())
       std::cout << "❌ NickName not valid ❌" << std::endl;
   } while (nickName.empty());
@@ -76,6 +98,11 @@ void Contact::contactSet()
   do {
     std::cout << "Please, enter your dark secret : ";
     std::getline(std::cin, darkSecret);
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
     if (darkSecret.empty())
       std::cout << "❌ Dark Secret not valid ❌" << std::endl;
   } while (darkSecret.empty());
@@ -162,7 +189,11 @@ int main()
   {
     std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
     std::getline(std::cin, command);
-
+    if(std::cin.eof())
+    {
+      std::cout<<"\nPas de EOF ICI VOYONS !\n";
+      exit(1);
+    }
     if (command == "ADD")
       book.addContact();
     else if (command == "SEARCH")
@@ -170,7 +201,5 @@ int main()
     else if (command == "EXIT")
       break;
   }
-  Contact c;
-  c.test = "datetimed";
   return 0;
 }
