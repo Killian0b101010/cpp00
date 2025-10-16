@@ -40,7 +40,7 @@
      << "amount:" << _amount << ";" 
      << "closed" << std::endl;
   } 
-
+  weweeeeee:
   int Account::getTotalAmount(void) { return _totalAmount; } 
 
   int Account::getNbAccounts(void) { return _nbAccounts; } 
