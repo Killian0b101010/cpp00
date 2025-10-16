@@ -6,7 +6,7 @@
 /*   By: kiteixei <kiteixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:03:44 by kiteixei          #+#    #+#             */
-/*   Updated: 2025/10/11 15:03:49 by kiteixei         ###   ########.fr       */
+/*   Updated: 2025/10/16 02:08:20 by kiteixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
     std::cout
      << " index:" <<_accountIndex << ";" 
      << "amount:" << _amount << ";" 
-     << "created" << std::endl 
+     << "created" << std::endl; 
   }
 
   Account::~Account(void)
