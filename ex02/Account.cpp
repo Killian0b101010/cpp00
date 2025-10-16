@@ -6,7 +6,7 @@
 /*   By: kiteixei <kiteixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:03:44 by kiteixei          #+#    #+#             */
-/*   Updated: 2025/10/16 02:08:20 by kiteixei         ###   ########.fr       */
+/*   Updated: 2025/10/16 02:22:45 by kiteixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
      << "amount:" << _amount << ";" 
      << "closed" << std::endl;
   } 
-
+  weweeeeee:
   int Account::getTotalAmount(void) { return _totalAmount; } 
 
   int Account::getNbAccounts(void) { return _nbAccounts; } 
