@@ -6,7 +6,7 @@
 /*   By: kiteixei <kiteixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:03:44 by kiteixei          #+#    #+#             */
-/*   Updated: 2025/10/16 02:08:20 by kiteixei         ###   ########.fr       */
+/*   Updated: 2025/10/16 02:19:55 by kiteixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
      << "amount:" << _amount << ";" 
      << "created" << std::endl; 
   }
-
+  CONFLIITT
   Account::~Account(void)
   {
     _displayTimestamp();
