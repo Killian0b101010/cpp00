@@ -15,7 +15,7 @@
     std::cout
      << " index:" <<_accountIndex << ";" 
      << "amount:" << _amount << ";" 
-     << "created" << std::endl; 
+     << "created" << std::endl 
   }
 
   Account::~Account(void)
